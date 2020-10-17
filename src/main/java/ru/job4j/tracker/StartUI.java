@@ -24,7 +24,7 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        System.out.println("start");
+        //System.out.println("start");
         Input validate = new ValidateInput(new ConsoleInput());
 
         try (Store tracker = new SqlTracker()) {

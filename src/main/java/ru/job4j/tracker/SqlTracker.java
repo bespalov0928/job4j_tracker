@@ -41,8 +41,20 @@ public class SqlTracker implements Store {
         item.setId(generateId());
         try (PreparedStatement st = cn.prepareStatement("insert into items(name) values (?)")) {
             st.setString(1, item.getName());
+            //st.setInt(2, Integer.valueOf(item.getId()));
             st.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try (PreparedStatement st = cn.prepareStatement("select * from items where name = ?")){
+            st.setString(1, item.getName());
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+                item.setId(rs.getString(1));
+                break;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return item;
@@ -82,7 +94,9 @@ public class SqlTracker implements Store {
         try (PreparedStatement st = cn.prepareStatement("select * from items")) {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                list.add(new Item(rs.getString(2)));
+                Item item = new Item(rs.getString(2));
+                item.setId(rs.getString(1));
+                list.add(item);
             }
         } catch (SQLException e) {
             e.printStackTrace();

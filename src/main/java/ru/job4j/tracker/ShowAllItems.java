@@ -15,7 +15,7 @@ public class ShowAllItems implements UserAction {
             System.out.print("Нет ни одной заявки.");
         }
         for (Item item : items) {
-            System.out.print(item.getName()+System.lineSeparator());
+            System.out.print(item+System.lineSeparator());
         }
         return true;
     }

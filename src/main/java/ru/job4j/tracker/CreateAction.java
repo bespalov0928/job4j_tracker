@@ -12,6 +12,7 @@ public class CreateAction implements UserAction {
         //System.out.println(name);
         Item item = new Item(name);
         tracker.add(item);
+        System.out.println(item);
         return true;
     }
 }

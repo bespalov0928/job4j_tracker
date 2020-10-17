@@ -16,7 +16,7 @@ public class FindItemsByName implements UserAction {
             System.out.println("Не найдено ни одной заявки.");
         } else {
             for (Item item : namesItem) {
-                System.out.print(item.getName());
+                System.out.print(item);
             }
         }
 
