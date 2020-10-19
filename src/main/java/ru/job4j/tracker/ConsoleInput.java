@@ -8,7 +8,7 @@ public class ConsoleInput implements Input {
     public String askStr(String question) {
         System.out.println(question);
         return scanner.nextLine();
-        //return "4";
+        //return "0";
     }
 
     public int askInt(String question) {
