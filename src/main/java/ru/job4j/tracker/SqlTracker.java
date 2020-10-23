@@ -6,25 +6,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class SqlTracker implements Store {
+public class SqlTracker implements Store, AutoCloseable {
+    //private final Connection cn;
+    //private static Connection cn;
     private Connection cn;
+
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
+
     private int ids = 1;
 
     public void init() {
-
-        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
-            Properties config = new Properties();
-            config.load(in);
-            Class.forName(config.getProperty("driver-class-name"));
-            cn = DriverManager.getConnection(
-                    config.getProperty("url"),
-                    config.getProperty("username"),
-                    config.getProperty("password")
-            );
-
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
+        cn = CreatConnection.init();
+//        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+//            Properties config = new Properties();
+//            config.load(in);
+//            Class.forName(config.getProperty("driver-class-name"));
+//            cn = DriverManager.getConnection(
+//                    config.getProperty("url"),
+//                    config.getProperty("username"),
+//                    config.getProperty("password")
+//            );
+//
+//        } catch (Exception e) {
+//            throw new IllegalStateException(e);
+//        }
     }
 
 //    private String generateId() {
