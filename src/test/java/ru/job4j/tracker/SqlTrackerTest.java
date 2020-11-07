@@ -103,6 +103,7 @@ public class SqlTrackerTest {
             Item rsl = tracker.findById(list.get(0).getId());
             assertThat(rsl.getName(), is("name"));
         } catch (Exception e) {
+
             e.printStackTrace();
         }
     }
