@@ -74,6 +74,9 @@ public class SqlTrackerTest {
     public void findAll() throws SQLException {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init))) {
             //tracker.add(new Item("name"));
+            tracker.add(new Item("name1"));
+            tracker.add(new Item("name2"));
+            tracker.add(new Item("name3"));
             List<Item> rslList = tracker.findAll();
             assertThat(rslList.size(), is(3));
         } catch (Exception e) {

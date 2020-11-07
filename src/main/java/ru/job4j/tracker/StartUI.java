@@ -5,6 +5,8 @@ import java.util.List;
 
 public class StartUI {
 
+
+
     public void init(Input input, Store tracker, UserAction[]  actions) {
         boolean run = true;
         while (run) {
@@ -28,8 +30,8 @@ public class StartUI {
     public static void main(String[] args) {
         //System.out.println("start");
         Input validate = new ValidateInput(new ConsoleInput());
-        Connection init = CreatConnection.init();
-        try (Store tracker = new SqlTracker(init)) {
+        //Connection init = CreatConnection.init();
+        try (Store tracker = new SqlTracker()) {
             tracker.init();
             UserAction[] actions = {
                     new CreateAction(),

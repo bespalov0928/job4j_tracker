@@ -11,6 +11,11 @@ public class SqlTracker implements Store, AutoCloseable {
     //private static Connection cn;
     private Connection cn;
 
+
+    public SqlTracker() {
+        this.cn = cn;
+    }
+
     public SqlTracker(Connection cn) {
         this.cn = cn;
     }
