@@ -1,18 +1,27 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 public class StubInput implements Input {
-    @Override
-    public String askStr(String question) {
-        return null;
+
+    private List<String> answer;
+    private int position = 0;
+
+    public StubInput(List<String> answer) {
+        this.answer = answer;
     }
 
-    @Override
+    public String askStr(String question) {
+        return answer.get(position++);
+    }
+
     public int askInt(String question) {
-        return 0;
+        return Integer.valueOf(askStr(question));
     }
 
     @Override
     public int askInt(String question, int max) {
-        return 0;
+        return askInt(question);
     }
+
 }

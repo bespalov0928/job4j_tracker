@@ -1,15 +1,17 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class MemTracker implements Store{
-    private final Item[] items = new Item[100];
+public class MemTracker implements Store {
+    private final Item[] items = new Item[10];
     private int ids = 1;
     private int size = 0;
 
 
-    private String generateId() {
-        return String.valueOf(ids++);
+    private int generateId() {
+        return ids++;
     }
 
     @Override
@@ -29,30 +31,44 @@ public class MemTracker implements Store{
     }
 
     @Override
-    public boolean replace(String id, Item item) {
+    public boolean replace(int id, Item item) {
+        for (int index = 0; index < size; index++) {
+            if (items[index].getId() == id) {
+                items[index] = item;
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(int id) {
         return false;
     }
 
     @Override
     public List<Item> findAll() {
-        return null;
+        return Arrays.asList(items);
     }
 
     @Override
     public List<Item> findByName(String key) {
-        return null;
+        List<Item> rsl = new ArrayList<>();
+        for (int index = 0; index < size; index++) {
+            Item item = items[index];
+            if (item.getName() == key) {
+                rsl.add(item);
+                break;
+            }
+        }
+        return rsl;
     }
 
-    public Item findById(String id) {
+    public Item findById(int id) {
         Item rsl = null;
         for (int index = 0; index < size; index++) {
             Item item = items[index];
-            if (item.getId().equals(id)) {
+            if (item.getId() == id) {
                 rsl = item;
                 break;
             }
