@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.service.HbmTracker;
+
 import java.sql.Connection;
 import java.util.List;
 
@@ -31,7 +33,8 @@ public class StartUI {
         //System.out.println("start");
         Input validate = new ValidateInput(new ConsoleInput());
         //Connection init = CreatConnection.init();
-        try (Store tracker = new SqlTracker()) {
+        //try (Store tracker = new SqlTracker()) {
+        try (Store tracker = new HbmTracker()) {
             tracker.init();
             UserAction[] actions = {
                     new CreateAction(),
