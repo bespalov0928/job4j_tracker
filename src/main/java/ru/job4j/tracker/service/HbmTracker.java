@@ -26,33 +26,33 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public Item add(Item item) {
         Item rsl = null;
-        Session session = sf.openSession();
-        try {
+        try (Session session = sf.openSession()) {
             session.beginTransaction();
             session.save(item);
             session.getTransaction().commit();
-            session.close();
+            //session.close();
             rsl = item;
-        }catch (Exception e){
-            session.close();
+        } catch (Exception e) {
+//            session.close();
             e.printStackTrace();
         }
         return rsl;
     }
 
+
     @Override
     public boolean replace(int id, Item item) {
         boolean rsl = false;
-        Session session = sf.openSession();
-        try {
+
+        try(Session session = sf.openSession()) {
             session.beginTransaction();
             item.setId(id);
             session.update(item);
             session.getTransaction().commit();
-            session.close();
+            //session.close();
             rsl = true;
         } catch (Exception e) {
-            session.close();
+//            session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -61,17 +61,17 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public boolean delete(int id) {
         boolean rsl = false;
-        Session session = sf.openSession();
-        try {
+
+        try(Session session = sf.openSession()) {
             session.beginTransaction();
             Item item = new Item(null);
             item.setId(id);
             session.delete(item);
             session.getTransaction().commit();
-            session.close();
+            //session.close();
             rsl = true;
         } catch (Exception e) {
-            session.close();
+            //session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -80,14 +80,14 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public List<Item> findAll() {
         List<Item> rsl = new ArrayList<>();
-        Session session = sf.openSession();
-        try {
+
+        try(Session session = sf.openSession()) {
             session.beginTransaction();
             List result = session.createQuery("from ru.job4j.tracker.Item").list();
             session.getTransaction().commit();
-            session.close();
+            //session.close();
         } catch (Exception e) {
-            session.close();
+            //session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -96,15 +96,15 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public List<Item> findByName(String key) {
         List<Item> rsl = new ArrayList<>();
-        Session session = sf.openSession();
-        try {
+
+        try(Session session = sf.openSession()) {
             session.beginTransaction();
             rsl = session.createQuery("from ru.job4j.tracker.Item where name = :name"
             ).setParameter("name", key).list();
             session.getTransaction().commit();
-            session.close();
+            //session.close();
         } catch (Exception e) {
-            session.close();
+            //session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -113,14 +113,14 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public Item findById(int id) {
         Item rsl = null;
-        Session session = sf.openSession();
-        try {
+
+        try(Session session = sf.openSession()) {
             session.beginTransaction();
             Item result = session.get(Item.class, id);
             session.getTransaction().commit();
-            session.close();
-        } catch (Exception e){
-            session.close();
+            //session.close();
+        } catch (Exception e) {
+            //session.close();
             e.printStackTrace();
         }
         return rsl;
