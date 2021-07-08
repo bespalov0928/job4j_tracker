@@ -30,10 +30,8 @@ public class HbmTracker implements Store, AutoCloseable {
             session.beginTransaction();
             session.save(item);
             session.getTransaction().commit();
-            //session.close();
             rsl = item;
         } catch (Exception e) {
-//            session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -49,10 +47,8 @@ public class HbmTracker implements Store, AutoCloseable {
             item.setId(id);
             session.update(item);
             session.getTransaction().commit();
-            //session.close();
             rsl = true;
         } catch (Exception e) {
-//            session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -68,10 +64,8 @@ public class HbmTracker implements Store, AutoCloseable {
             item.setId(id);
             session.delete(item);
             session.getTransaction().commit();
-            //session.close();
             rsl = true;
         } catch (Exception e) {
-            //session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -85,9 +79,7 @@ public class HbmTracker implements Store, AutoCloseable {
             session.beginTransaction();
             List result = session.createQuery("from ru.job4j.tracker.Item").list();
             session.getTransaction().commit();
-            //session.close();
         } catch (Exception e) {
-            //session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -102,9 +94,7 @@ public class HbmTracker implements Store, AutoCloseable {
             rsl = session.createQuery("from ru.job4j.tracker.Item where name = :name"
             ).setParameter("name", key).list();
             session.getTransaction().commit();
-            //session.close();
         } catch (Exception e) {
-            //session.close();
             e.printStackTrace();
         }
         return rsl;
@@ -118,9 +108,7 @@ public class HbmTracker implements Store, AutoCloseable {
             session.beginTransaction();
             Item result = session.get(Item.class, id);
             session.getTransaction().commit();
-            //session.close();
         } catch (Exception e) {
-            //session.close();
             e.printStackTrace();
         }
         return rsl;
